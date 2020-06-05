@@ -1,0 +1,16 @@
+# Sidebar navigation
+
+- label: "Introduction"
+  link: "/"
+- label: "Getting started"
+  link: "/getting-started"
+- label: Functional Modules
+  items:
+    - label: "Dev Tools"
+      link: "/modules/devtools"
+    - label: "Data Browser"
+      link: "/modules/data-browser"
+    - label: "Chat Module"
+      link: "/modules/chat-module"
+    - label: "Files Manager"
+      link: "/modules/files-manager"
