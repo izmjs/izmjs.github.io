@@ -6,7 +6,7 @@ module.exports = {
     siteDescription: `a Highly maintainable & modular NodeJS project architecture`,
     siteUrl: `https://github.com/izmjs/izmjs`,
     siteAuthor: "izmjs",
-    siteImage: `/banner.jpg`,
+    siteImage: `/banner.png`,
     siteLanguage: `en`,
     themeColor: `#A16941`,
     basePath: `/`,
