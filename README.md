@@ -7,18 +7,23 @@
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/ce1882e9-e428-41b4-9ef0-8151f3125e09/deploy-status)](https://app.netlify.com/sites/izmjs/deploys)
 
-🚀 Quick start
-Fork and clone the project
+#### 🚀 Quick start
 
-`git clone git@github.com:<your-username>/izmjs.github.io.git`
+[Fork](https://help.github.com/en/github/getting-started-with-github/fork-a-repo) and clone the project:
 
-Start developing.
+```shell
+git clone git@github.com:<your-username>/izmjs.github.io.git
+```
+
+#### Start developing.
 
 Navigate into your new site’s directory and start it up.
 
-`cd izmjs.github.io/`
-
-`gatsby develop`
+```shell
+cd izmjs.github.io/
+npm install # Install dependencies
+npm start # Start developing
+```
 
 Open the source code and start editing!
 
@@ -28,7 +33,7 @@ Note: You'll also see a second link: http://localhost:8000/___graphql.
 
 > This is a tool you can use to experiment with querying your data. Learn more about using this tool in the Gatsby tutorial.
 
-🧐 Want to contribute ?
+#### 🧐 Want to contribute ?
 
 The docs are separated into sections and subsections
 
