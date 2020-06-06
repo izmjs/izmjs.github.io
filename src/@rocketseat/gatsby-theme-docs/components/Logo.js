@@ -28,7 +28,7 @@ export default function () {
       <span>
         <img src={logo} alt="IZMjs" className="logo__image" />
       </span>
-      <span class="logo__title">izmjs</span>
+      <span className="logo__title">izmjs</span>
     </Logo>
   );
 }
