@@ -8,7 +8,7 @@ devtools functional module it's a super simple tool that takes away so much of t
 
 First off open up devtools on you preffered browser and go to `http://<ip-address>:<your-port-number>/devtools`
 
-![devtools welcome screen](./devtools_welcome_screen.png)
+![devtools welcome screen](../images/devtools/devtools_welcome_screen.png)
 
 One of the first things you'll notice is that devtools with two buttons; one that generates a [JSON](https://www.json.org/json-en.html) file that contains your [envirement viarialbles](link/to/env/vars) and the other generates the docs for the server code
 
@@ -16,15 +16,26 @@ One of the first things you'll notice is that devtools with two buttons; one tha
 
 If you don't have Postman already Installed make sure to download it from this [link](https://www.postman.com/)
 
-after the installation is done open it up and start a new workspace
-
-![postman workspace](./postman_new_workspace.png)
-
 Then next step is to import the auto generated JSON files and import them at your newly created workspace
 
-![postman import files](./postman_import_files.png)
+![postman import files](../images/devtools/postman.png)
 
-![postman import files](./postman_import_files_2.png)
+![postman import files](../images/devtools/postman_import.png)
+
+![postman import files](../images/devtools/postman_docs.png)
+![postman import files](../images/devtools/postman_env.png)
+![postman import files](../images/devtools/postman_request.png)
+![postman import files](../images/devtools/postman_response.png)
+
+```json title=.env/.defaults.json lineNumbers=true
+{
+  "username": "john",
+  "password": "Azerty@1234",
+  "email": "starter@example.com",
+  "firstname": "John",
+  "lastname": "Smith"
+}
+```
 
 ## Data browser
 
