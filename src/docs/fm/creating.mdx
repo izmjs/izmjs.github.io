@@ -9,11 +9,11 @@ There are three ways to create functional modules:
 
 3 - Create them manually from scratch
 
-To show you how functional modules work under the hood we will go with the second approach, in your text editor go under `/modules` and create a new folder call it `todo` you can call it whatever seems fit but we'll be making a tasks module.
+To show you how functional modules work under the hood we will go with the this approach, in your text editor go under `/modules` and create a new folder call it `todo` you can call it whatever seems fit but we'll be making a todo module.
 In your terminal change directories to `/todo` and initialize it
 
 ```bash
-cd tasks
+cd todo
 npm init -y
 ```
 
@@ -21,10 +21,8 @@ npm init -y
 
 The bootstraps folder executes all the files you put in it on server startup, suitable for app initialization.
 
-Under tasks create another folder called `bootstraps` and under that create a file called `main.server.bootsrap.js`.
+Under `/todo` create another folder called `bootstraps` and under that create a file called `main.server.bootsrap.js`.
 your folder structure so far should look something like this
-
-> the file name is important it must follow this pattern `<file-name>.server.bootstrap.js` in order for them to be picked up
 
 ```bash
 modules
@@ -32,6 +30,8 @@ modules
     └── bootstraps
         └── main.server.bootstrap.js
 ```
+
+> the file name is important it must follow this pattern `<file-name>.server.bootstrap.js` in order for them to be picked up
 
 Open the `main.server.bootsrap.js` in your text editor and start by exporting a function like this
 
@@ -104,10 +104,10 @@ module.exports = {
       methods: {
         get: {
           iam: "modules:todo:main:list",
-          title: "List tasks",
+          title: "List todo",
           groups: [],
           parents: ["modules:todo", "modules:todo:main"],
-          description: "List available tasks",
+          description: "List available todo",
           middlewares: [],
         },
       },
@@ -277,11 +277,11 @@ exports.  =  async  function (req, res, next) {
 };
 ```
 
-we will create two controllers for the `list` and `create` tasks
+we will create two controllers for the `list` and `create` todo
 
 ```javascript title=modules/todo/controllers/main.server.iam.js lineNumbers=true
 /**
- * List Tasks
+ * List todo
  * @controller List
  * @param  {Express.Request}  req The request
  * @param  {OutcommingMessage}  res The response
@@ -320,19 +320,19 @@ module.exports = {
       path: "/",
       methods: {
         get: {
-          iam: "modules:tasks:main:list",
-          title: "List tasks",
+          iam: "modules:todo:main:list",
+          title: "List todo",
           groups: [],
-          parents: ["modules:tasks", "modules:tasks:main"],
-          description: "List available tasks",
+          parents: ["modules:todo", "modules:todo:main"],
+          description: "List available todo",
           middlewares: [crtls.list],
         },
         {
         post: {
-          iam: "modules:tasks:main:create",
+          iam: "modules:todo:main:create",
           title: "Create new task",
           groups: [],
-          parents: ["modules:tasks", "modules:tasks:main"],
+          parents: ["modules:todo", "modules:todo:main"],
           description: "Create new task",
           middlewares: [crtls.create],
         },
@@ -377,7 +377,7 @@ module.exports = {
 };
 ```
 
-And now our next step is to create a model for our tasks
+And now our next step is to create a model for our todo
 
 ## Models
 
@@ -421,7 +421,7 @@ const TodoSchema = new Schema(
 module.exports = model("Todo", TodoSchema);
 ```
 
-Now let's use our newly created model in the controller, on the top of the file require in the model from [mongoose](https://mongoosejs.com/) and do the logic for listing our tasks and creating a task
+Now let's use our newly created model in the controller, on the top of the file require in the model from [mongoose](https://mongoosejs.com/) and do the logic for listing our todo and creating a task
 
 ```javascript title=modules/todo/controllers/main.server.controller.js lineNumbers=true
 const { model } = require("mongoose");
