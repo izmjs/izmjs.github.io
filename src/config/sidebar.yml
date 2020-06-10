@@ -5,4 +5,12 @@
 - label: Getting Started
   link: "/getting-started"
 - label: Functional Modules
-  link: "/functional-modules"
+  items:
+    - label: Introduction
+      link: "fm/introduction"
+    - label: Built-in Functional Modules
+      link: "fm/functional-modules"
+    - label: "Creating Your Own Functional Module"
+      link: "fm/creating"
+    - label: "Authentication & Authorization"
+      link: "fm/auth"
