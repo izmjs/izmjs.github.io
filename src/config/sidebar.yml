@@ -5,12 +5,18 @@
 - label: Getting Started
   link: "/getting-started"
 - label: Functional Modules
+  link: "/functional-modules"
+- label: Create your own module
+  link: "/create-your-own"
+- label: Authentication & Authorization
+  link: "/roles"
+- label: Built-in Functional Modules
   items:
-    - label: Introduction
-      link: "fm/introduction"
-    - label: Built-in Functional Modules
-      link: "fm/functional-modules"
-    - label: "Creating Your Own Functional Module"
-      link: "fm/creating"
-    - label: "Authentication & Authorization"
-      link: "fm/auth"
+    - label: Devtools
+      link: "fm/devtools"
+    - label: Data Browser
+      link: "fm/data-browser"
+    - label: Chat Module
+      link: "fm/chat-module"
+    - label: Files Manager
+      link: "fm/files-manager"
