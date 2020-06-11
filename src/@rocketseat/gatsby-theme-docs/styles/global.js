@@ -75,9 +75,9 @@ export default function GlobalStyle() {
           display: inline-block;
           vertical-align: middle;
           line-height: 1;
-          padding: 0.2em 0.2em 0.3em 0.2em;
-          background-color: #44475a;
-          color: rgba(248, 248, 242);
+          padding: 0.1em 0.1em 0.2em 0.1em;
+          background-color: #ffff99;
+          color: #44475a;
           font-size: 14px;
           border-radius: 3px;
           font-feature-settings: "clig" 0, "calt" 0;

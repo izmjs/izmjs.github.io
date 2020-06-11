@@ -116,7 +116,6 @@ module.exports = {
           description: "List available todo",
           middlewares: [crtls.list],
         },
-        {
         post: {
           iam: "modules:todo:main:create",
           title: "Create new task",
@@ -125,43 +124,37 @@ module.exports = {
           description: "Create new task",
           middlewares: [crtls.create],
         },
-      }
-      },
-    }, {
-    path: '/:taskId',
-    methods: {
-      get: {
-        iam: 'modules:todo:main:one:get',
-        title: 'Get task',
-        groups: [],
-        parents: ['modules:todo', 'modules:todo:main'],
-        description: 'Get specific task',
-        middlewares: [
-          ctrls.one,
-        ],
-      },
-      put: {
-        iam: 'modules:todo:main:one:get',
-        title: 'Update task',
-        groups: [],
-        parents: ['modules:todo', 'modules:todo:main'],
-        description: 'Modify task',
-        middlewares: [
-          ctrls.update,
-        ],
-      },
-      delete: {
-        iam: 'modules:todo:main:one:remove',
-        title: 'Remove task',
-        groups: [],
-        parents: ['modules:todo', 'modules:todo:main'],
-        description: 'Remove an existing task',
-        middlewares: [
-          ctrls.remove,
-        ],
       },
     },
-  }
+    {
+      path: "/:taskId",
+      methods: {
+        get: {
+          iam: "modules:todo:main:one:get",
+          title: "Get task",
+          groups: [],
+          parents: ["modules:todo", "modules:todo:main"],
+          description: "Get specific task",
+          middlewares: [ctrls.one],
+        },
+        put: {
+          iam: "modules:todo:main:one:get",
+          title: "Update task",
+          groups: [],
+          parents: ["modules:todo", "modules:todo:main"],
+          description: "Modify task",
+          middlewares: [ctrls.update],
+        },
+        delete: {
+          iam: "modules:todo:main:one:remove",
+          title: "Remove task",
+          groups: [],
+          parents: ["modules:todo", "modules:todo:main"],
+          description: "Remove an existing task",
+          middlewares: [ctrls.remove],
+        },
+      },
+    },
   ],
 };
 ```

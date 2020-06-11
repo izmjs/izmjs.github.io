@@ -1,7 +1,7 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { useStaticQuery, graphql, Link } from 'gatsby';
-import { useSidebar } from '@rocketseat/gatsby-theme-docs-core';
+import React from "react";
+import PropTypes from "prop-types";
+import { useStaticQuery, graphql, Link } from "gatsby";
+import { useSidebar } from "@rocketseat/gatsby-theme-docs-core";
 
 import {
   Container,
@@ -10,11 +10,11 @@ import {
   Heading,
   Item,
   SubItem,
-} from './styles';
-import { isExternalUrl } from '../../util/url';
-import ExternalLink from './ExternalLink';
-import InternalLink from './InternalLink';
-import Logo from '../Logo';
+} from "./styles";
+import { isExternalUrl } from "../../util/url";
+import ExternalLink from "./ExternalLink";
+import InternalLink from "./InternalLink";
+import Logo from "../Logo";
 
 function ListWithSubItems({ children, text }) {
   return (
@@ -62,7 +62,7 @@ export default function Sidebar({ isMenuOpen }) {
         <List>
           {data.map(({ node: { label, link, items, id } }) => {
             if (Array.isArray(items)) {
-              const subitems = items.map(item => {
+              const subitems = items.map((item) => {
                 return (
                   <Item key={item.link}>
                     {renderLink(item.link, item.label)}

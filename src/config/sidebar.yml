@@ -6,8 +6,8 @@
   link: "/getting-started"
 - label: Functional Modules
   items:
-    - label: Introduction
-      link: "fm-tutorial/introduction"
+    - label: Usage
+      link: "fm-tutorial/usage"
     - label: Initial Setup
       link: "fm-tutorial/initial-setup"
     - label: Bootstraps

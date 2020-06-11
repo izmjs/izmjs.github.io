@@ -1,5 +1,5 @@
-import styled from '@emotion/styled';
-import { darken } from 'polished';
+import styled from "@emotion/styled";
+import { darken } from "polished";
 
 export const Container = styled.aside`
   width: 20%;
@@ -42,7 +42,7 @@ export const Container = styled.aside`
     max-width: 240px;
     min-width: 240px;
     transform: translate3d(
-      ${({ isMenuOpen }) => (isMenuOpen ? '0' : '-100%')},
+      ${({ isMenuOpen }) => (isMenuOpen ? "0" : "-100%")},
       0,
       0
     );
@@ -82,15 +82,15 @@ export const Heading = styled.li`
   padding-left: 30px;
   width: 100%;
   text-transform: uppercase;
-  font-size: 13px;
+  font-size: 10px;
   font-weight: bold;
-  margin-top: 20px;
+  margin-top: 16px;
   color: ${({ theme }) => theme.colors.primary};
   letter-spacing: 0.142em;
 `;
 
 export const Item = styled.li`
-  font-size: 15px;
+  font-size: 12px;
   width: 100%;
   transition: all 200ms ease-in-out;
   padding: 0 20px;
@@ -98,7 +98,7 @@ export const Item = styled.li`
   a,
   span {
     display: block;
-    font-size: 15px;
+    font-size: 12px;
     color: ${({ theme }) => theme.colors.sidebar.link};
     background-color: ${({ theme }) => theme.colors.sidebar.background};
     padding: 4px 10px;
@@ -127,11 +127,11 @@ export const Item = styled.li`
 
     &:not(.active-link):hover {
       padding-left: 20px;
-      color: ${({ theme }) => darken('0.2', theme.colors.sidebar.link)};
+      color: ${({ theme }) => darken("0.2", theme.colors.sidebar.link)};
     }
 
     &.active-link {
-      color: ${({ theme }) => darken('0.2', theme.colors.sidebar.link)};
+      color: ${({ theme }) => darken("0.2", theme.colors.sidebar.link)};
       background-color: ${({ theme }) => theme.colors.sidebar.itemActive};
     }
   }
