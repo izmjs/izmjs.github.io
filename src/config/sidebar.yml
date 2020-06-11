@@ -5,11 +5,21 @@
 - label: Getting Started
   link: "/getting-started"
 - label: Functional Modules
-  link: "/functional-modules"
-- label: Create your own module
-  link: "/create-your-own"
-- label: Authentication & Authorization
-  link: "/roles"
+  items:
+    - label: Introduction
+      link: "fm-tutorial/introduction"
+    - label: Initial Setup
+      link: "fm-tutorial/initial-setup"
+    - label: Bootstraps
+      link: "fm-tutorial/bootstraps"
+    - label: IAM
+      link: "fm-tutorial/iam"
+    - label: Controllers
+      link: "fm-tutorial/controllers"
+    - label: Models
+      link: "fm-tutorial/models"
+    - label: Authentication & Authorization
+      link: "fm-tutorial/roles"
 - label: Built-in Functional Modules
   items:
     - label: Devtools
