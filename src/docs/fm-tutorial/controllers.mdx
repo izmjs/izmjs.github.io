@@ -36,7 +36,7 @@ Now let's create all the controllers for our CRUD
 
 ```javascript title=modules/todo/controllers/main.server.iam.js lineNumbers=true
 /**
- * List todo
+ * List todos
  * @controller List
  * @param  {Express.Request}  req The request
  * @param  {OutcommingMessage}  res The response
@@ -56,7 +56,7 @@ exports.list = async function list(req, res, next) {
  */
 
 exports.create = async function create(req, res, next) {
-  res.json({ message: "hello world" });
+  res.status(201).json({ message: "Todo Created" });
 };
 
 /**
@@ -68,7 +68,7 @@ exports.create = async function create(req, res, next) {
  */
 
 exports.one = async function one(req, res, next) {
-  res.json({ message: "hello world" });
+  res.json({ message: "got one task" });
 };
 
 /**
@@ -80,7 +80,7 @@ exports.one = async function one(req, res, next) {
  */
 
 exports.update = async function update(req, res, next) {
-  res.json({ message: "hello world" });
+  res.json({ message: "Updated one task" });
 };
 
 /**
@@ -92,7 +92,7 @@ exports.update = async function update(req, res, next) {
  */
 
 exports.remove = async function remove(req, res, next) {
-  res.json({ message: "hello world" });
+  res.json({ message: "deleted one task" });
 };
 ```
 
@@ -116,15 +116,16 @@ module.exports = {
           groups: [],
           parents: ["modules:todo", "modules:todo:main"],
           description: "List available todo",
-          middlewares: [crtls.list],
+          middlewares: [ctrls.list],
         },
+
         post: {
           iam: "modules:todo:main:create",
           title: "Create new task",
           groups: [],
           parents: ["modules:todo", "modules:todo:main"],
           description: "Create new task",
-          middlewares: [crtls.create],
+          middlewares: [ctrls.create],
         },
       },
     },
@@ -140,7 +141,7 @@ module.exports = {
           middlewares: [ctrls.one],
         },
         put: {
-          iam: "modules:todo:main:one:get",
+          iam: "modules:todo:main:one:update",
           title: "Update task",
           groups: [],
           parents: ["modules:todo", "modules:todo:main"],

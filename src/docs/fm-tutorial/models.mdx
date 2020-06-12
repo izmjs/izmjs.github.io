@@ -45,16 +45,18 @@ module.exports = model("Todo", TodoSchema);
 Now let's use our newly created model in the controller, on the top of the file require in the model from [mongoose](https://mongoosejs.com/) and do the logic for listing our todo and creating a task
 
 ```javascript title=modules/todo/controllers/main.server.controller.js lineNumbers=true
-const { model } = require("mongoose");
+const { model, Types } = require("mongoose");
+
 const Todo = model("Todo");
 
 /**
- * List tasls
+ * List todos
  * @controller List
- * @param {Express.Request} req The request
- * @param {OutcommingMessage} res The response
- * @param {Function} next Go to the next middleware
+ * @param  {Express.Request}  req The request
+ * @param  {OutcommingMessage}  res The response
+ * @param  {Function}  next Go to the next middleware
  */
+
 exports.list = async function list(req, res, next) {
   try {
     const result = await Todo.find();
@@ -65,12 +67,13 @@ exports.list = async function list(req, res, next) {
 };
 
 /**
- * Create new task
+ * Create todo
  * @controller Create
- * @param {Express.Request} req The request
- * @param {OutcommingMessage} res The response
- * @param {Function} next Go to the next middleware
+ * @param  {Express.Request}  req The request
+ * @param  {OutcommingMessage}  res The response
+ * @param  {Function}  next Go to the next middleware
  */
+
 exports.create = async function create(req, res, next) {
   const { body } = req;
   let task = new Todo(body);
@@ -82,5 +85,102 @@ exports.create = async function create(req, res, next) {
   }
 
   return res.status(201).json(task);
+};
+
+/**
+ * List one Todo
+ * @controller One
+ * @param  {Express.Request}  req The request
+ * @param  {OutcommingMessage}  res The response
+ * @param  {Function}  next Go to the next middleware
+ */
+
+exports.one = async function one(req, res, next) {
+  const { taskId } = req.params;
+
+  if (!Types.ObjectId.isValid(taskId)) {
+    return res.status(400).send({
+      message: req.t("INVALID_TASK_ID", {
+        taskId,
+      }),
+    });
+  }
+  let task;
+  try {
+    task = await Todo.findById(taskId);
+  } catch (e) {
+    return next(e);
+  }
+  if (!task) {
+    return res.status(404).send({
+      message: req.t("TASK_NOT_FOUND", {
+        taskId,
+      }),
+    });
+  }
+  return res.json(task);
+};
+
+/**
+ * Update todo
+ * @controller Update
+ * @param  {Express.Request}  req The request
+ * @param  {OutcommingMessage}  res The response
+ * @param  {Function}  next Go to the next middleware
+ */
+
+exports.update = async function update(req, res, next) {
+  const { taskId } = req.params;
+  if (!Types.ObjectId.isValid(taskId)) {
+    return res.status(400).send({
+      message: req.t("INVALID_TASK_ID", {
+        taskId,
+      }),
+    });
+  }
+
+  let updatedTodo;
+  try {
+    updatedTodo = await Todo.findOneAndUpdate(
+      { _id: taskId },
+      {
+        name: req.body.name,
+        done: req.body.done,
+      },
+      { new: true }
+    );
+  } catch (e) {
+    next(e);
+  }
+
+  return res.send(updatedTodo);
+};
+
+/**
+ * Remove todo
+ * @controller Remove
+ * @param  {Express.Request}  req The request
+ * @param  {OutcommingMessage}  res The response
+ * @param  {Function}  next Go to the next middleware
+ */
+
+exports.remove = async function remove(req, res, next) {
+  const { taskId } = req.params;
+  if (!Types.ObjectId.isValid(taskId)) {
+    return res.status(400).send({
+      message: req.t("INVALID_TASK_ID", {
+        taskId,
+      }),
+    });
+  }
+  let deletedTask;
+
+  try {
+    deletedTask = await Todo.deleteOne({ _id: taskId });
+  } catch (e) {
+    next(e);
+  }
+
+  return res.send(deletedTask);
 };
 ```

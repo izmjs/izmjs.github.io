@@ -134,65 +134,60 @@ Now let's make the rest of the routes necessary for our CRUD
  * @type { IAM.default }
  */
 module.exports = {
-  prefix: "/task",
+  prefix: '/todo',
   routes: [
     {
-      path: "/",
+      path: '/',
       methods: {
         get: {
-          iam: "modules:todo:main:list",
-          title: "List todo",
+          iam: 'modules:todo:main:list',
+          title: 'List todo',
           groups: [],
-          parents: ["modules:todo", "modules:todo:main"],
-          description: "List available todo",
-          middlewares: [(req, res) => res.json({message: "Hello, world"})],
+          parents: ['modules:todo', 'modules:todo:main'],
+          description: 'List available todo',
+          middlewares: [(req, res) => res.json({ message: 'Hello, world' })],
         },
-        {
+
         post: {
-          iam: "modules:todo:main:create",
-          title: "Create new task",
+          iam: 'modules:todo:main:create',
+          title: 'Create new task',
           groups: [],
-          parents: ["modules:todo", "modules:todo:main"],
-          description: "Create new task",
-          middlewares: [(req, res) => res.json({message: "Hello, world"})],
+          parents: ['modules:todo', 'modules:todo:main'],
+          description: 'Create new task',
+          middlewares: [(req, res) => res.status(201).json({ message: 'Todo Created' })],
         },
-      }
-      },
-    }, {
-    path: '/:taskId',
-    methods: {
-      get: {
-        iam: 'modules:todo:main:one:get',
-        title: 'Get task',
-        groups: [],
-        parents: ['modules:todo', 'modules:todo:main'],
-        description: 'Get specific task',
-        middlewares: [
-          middlewares: [(req, res) => res.json({message: "Hello, world"})],
-        ],
-      },
-      put: {
-        iam: 'modules:todo:main:one:update',
-        title: 'Update task',
-        groups: [],
-        parents: ['modules:todo', 'modules:todo:main'],
-        description: 'Modify task',
-        middlewares: [
-          middlewares: [(req, res) => res.json({message: "Hello, world"})],
-        ],
-      },
-      delete: {
-        iam: 'modules:todo:main:one:remove',
-        title: 'Remove task',
-        groups: [],
-        parents: ['modules:todo', 'modules:todo:main'],
-        description: 'Remove an existing task',
-        middlewares: [
-          middlewares: [(req, res) => res.json({message: "Hello, world"})],
-        ],
       },
     },
-  }
+    {
+      path: '/:taskId',
+      methods: {
+        get: {
+          iam: 'modules:todo:main:one:get',
+          title: 'Get task',
+          groups: [],
+          parents: ['modules:todo', 'modules:todo:main'],
+          description: 'Get specific task',
+          middlewares: [(req, res) => res.json({ message: 'got one task' })],
+        },
+        put: {
+          iam: 'modules:todo:main:one:update',
+          title: 'Update task',
+          groups: [],
+          parents: ['modules:todo', 'modules:todo:main'],
+          description: 'Modify task',
+          middlewares: [(req, res) => res.json({ message: 'Updated one task' })],
+        },
+        delete: {
+          iam: 'modules:todo:main:one:remove',
+          title: 'Remove task',
+          groups: [],
+          parents: ['modules:todo', 'modules:todo:main'],
+          description: 'Remove an existing task',
+          middlewares: [(req, res) => res.json({ message: 'deleted one task' })],
+        },
+      },
+    },
   ],
 };
+
 ```
