@@ -18,8 +18,10 @@
       link: "fm-tutorial/controllers"
     - label: Models
       link: "fm-tutorial/models"
-    - label: Authentication & Authorization
+    - label: Managing Roles
       link: "fm-tutorial/roles"
+    - label: i18n
+      link: "fm-tutorial/i18n"
 - label: Built-in Functional Modules
   items:
     - label: Devtools
@@ -30,3 +32,7 @@
       link: "fm/chat-module"
     - label: Files Manager
       link: "fm/files-manager"
+- label: misc
+  items:
+    - label: VSCode Snippets
+      link: "misc/snippets"
