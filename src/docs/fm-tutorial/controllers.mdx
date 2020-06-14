@@ -99,7 +99,9 @@ exports.remove = async function remove(req, res, next) {
 now let's get back to our `modules/todo/iam/main.server.iam.js` file and require in our controllers on the top
 
 ```javascript title=modules/todo/iam/main.server.iam.js lineNumbers=true
+//highlight-start
 const ctrls = require("../controllers/main.server.controller");
+//highlight-end
 
 /**
  * @type { IAM.default }
@@ -116,7 +118,9 @@ module.exports = {
           groups: [],
           parents: ["modules:todo", "modules:todo:main"],
           description: "List available todo",
+          //highlight-start
           middlewares: [ctrls.list],
+          //highlight-end
         },
 
         post: {
@@ -125,7 +129,9 @@ module.exports = {
           groups: [],
           parents: ["modules:todo", "modules:todo:main"],
           description: "Create new task",
+          //highlight-start
           middlewares: [ctrls.create],
+          //highlight-end
         },
       },
     },
@@ -138,7 +144,9 @@ module.exports = {
           groups: [],
           parents: ["modules:todo", "modules:todo:main"],
           description: "Get specific task",
+          //highlight-start
           middlewares: [ctrls.one],
+          //highlight-end
         },
         put: {
           iam: "modules:todo:main:one:update",
@@ -146,7 +154,9 @@ module.exports = {
           groups: [],
           parents: ["modules:todo", "modules:todo:main"],
           description: "Modify task",
+          //highlight-start
           middlewares: [ctrls.update],
+          //highlight-end
         },
         delete: {
           iam: "modules:todo:main:one:remove",
@@ -154,7 +164,9 @@ module.exports = {
           groups: [],
           parents: ["modules:todo", "modules:todo:main"],
           description: "Remove an existing task",
+          //highlight-start
           middlewares: [ctrls.remove],
+          //highlight-end
         },
       },
     },

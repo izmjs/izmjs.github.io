@@ -38,10 +38,14 @@ For the purposes of this tutorial we're not going to go into the details and ins
 Remove the parameters because we're not going to use them and require in [debug](https://www.npmjs.com/package/debug) and call it inside the function with the string "Todo app Initialized"
 
 ```javascript title=modules/todo/bootstraps/main.server.bootstrap.js lineNumbers=true
+// highlight-start
 const debug = require("debug")("modules:todo:bootstrap");
+//highlight-end
 
 module.exports = () => {
+  // highlight-start
   debug("Todo app Initialized");
+  //highlight-end
 };
 ```
 

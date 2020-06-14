@@ -45,10 +45,12 @@ module.exports = model("Todo", TodoSchema);
 Now let's use our newly created model in the controller, on the top of the file require in the model from [mongoose](https://mongoosejs.com/) and do the logic for listing our todo and creating a task
 
 ```javascript title=modules/todo/controllers/main.server.controller.js lineNumbers=true
+//highlight-start
 const { model, Types } = require("mongoose");
-
 const Todo = model("Todo");
+//highlight-end
 
+//highlight-start
 /**
  * List todos
  * @controller List
@@ -65,7 +67,9 @@ exports.list = async function list(req, res, next) {
     return next(e);
   }
 };
+//highlight-end
 
+//highlight-start
 /**
  * Create todo
  * @controller Create
@@ -86,7 +90,9 @@ exports.create = async function create(req, res, next) {
 
   return res.status(201).json(task);
 };
+//highlight-end
 
+//highlight-start
 /**
  * List one Todo
  * @controller One
@@ -120,7 +126,9 @@ exports.one = async function one(req, res, next) {
   }
   return res.json(task);
 };
+//highlight-end
 
+//highlight-start
 /**
  * Update todo
  * @controller Update
@@ -155,7 +163,9 @@ exports.update = async function update(req, res, next) {
 
   return res.send(updatedTodo);
 };
+//highlight-end
 
+//highlight-start
 /**
  * Remove todo
  * @controller Remove
@@ -183,4 +193,5 @@ exports.remove = async function remove(req, res, next) {
 
   return res.send(deletedTask);
 };
+//highlight-end
 ```
