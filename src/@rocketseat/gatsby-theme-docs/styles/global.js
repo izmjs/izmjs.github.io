@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Global, css } from "@emotion/core";
 import { useTheme } from "emotion-theming";
 import { lighten } from "polished";
+import { NightModeContext } from '../../../providers/NightModeProvider'
 
 export default function GlobalStyle() {
   const theme = useTheme();
+  const {mode} = useContext(NightModeContext)
 
   return (
     <Global
@@ -30,13 +32,33 @@ export default function GlobalStyle() {
         body {
           font-size: 16px;
           font-family: "Roboto", sans-serif;
-          background-color: ${theme.colors.background};
+          background-color: ${mode === 'night' ? theme.colors.night.background : theme.colors.light.background};
           text-rendering: optimizelegibility;
+        }
+
+        blockquote p {
+          background: ${mode === 'night' ? '#343434' : '#f5f5fa'} !important;
+        }
+
+        aside {
+          background-color: ${mode === 'night' ? '#171717' : theme.colors.light.background} !important;
+        }
+
+        aside a.active-link {
+          background: ${mode === 'night' ? '#343434' : '#FFF3EA'} !important;
+        }
+
+        aside a {
+          background: ${mode === 'night' ? theme.colors.night.background : '#FFF3EA'} !important;
+        }
+
+        nav ul li a {
+          color: ${mode === 'night' ? theme.colors.night.primary : '#999999'} !important;
         }
 
         h1 {
           font-size: 32px;
-          color: #333;
+          color: ${mode === 'night' ? theme.colors.night.primary : '#333'};
           font-weight: normal;
           margin-bottom: 24px;
         }
@@ -58,13 +80,13 @@ export default function GlobalStyle() {
         h4,
         h5,
         h6 {
-          color: #737380;
+          color: ${mode === 'night' ? theme.colors.night.primary : '#737380'} !important;
           margin: 24px 0 16px 0;
           font-weight: normal;
         }
 
         p {
-          color: #737380;
+          color: ${mode === 'night' ? theme.colors.night.primary : '#737380'};
           font-size: 16px;
           line-height: 28px;
           margin-bottom: 16px;
@@ -86,11 +108,11 @@ export default function GlobalStyle() {
         }
 
         a {
-          color: #737380;
+          color: ${mode === 'night' ? theme.colors.night.primary : '#737380'};
           font-weight: bold;
 
           &:hover {
-            color: ${theme.colors.primary}!important;
+            color: ${mode === 'night' ? theme.colors.night.primary : theme.colors.light.primary} !important;
             transition: all 100ms cubic-bezier(0.4, 0, 0.2, 1) 0s;
             opacity: 1 !important;
           }
@@ -145,7 +167,7 @@ export default function GlobalStyle() {
 
         ul,
         ol {
-          color: #737380;
+          color: ${mode === 'night' ? theme.colors.night.primary : '#737380'};
           padding-left: 15px;
           margin-bottom: 16px;
 

@@ -1,7 +1,13 @@
 export default {
   colors: {
-    primary: "#A16941",
-    background: "#fff",
+    light: {
+      primary: "#A16941",
+      background: "#fff",
+    },
+    night: {
+      primary: "#fff",
+      background: "#212121",
+    },
     sidebar: {
       background: "#ffffff",
       link: "#999",
