@@ -1,13 +1,32 @@
 import React, { useContext } from "react";
 import styled from "@emotion/styled";
-import Toggle from "../../../components/Toggle";
 import { NightModeContext } from "../../../providers/NightModeProvider";
+import Moon from "../../../components/Icons/Moon";
+import Sun from "../../../components/Icons/Sun";
 import logo from "../assets/izm.png";
 
 const Wrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  button {
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 8px;
+    border-radius: 50%;
+    transition: 0.3s all;
+
+    &:hover {
+      background: #a1684161;
+      transition: 0.3s all;
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
 `;
 
 const Flex = styled.div`
@@ -41,7 +60,9 @@ const Logo = () => {
         </span>
         <span className="logo__title">izmjs</span>
       </Flex>
-      <Toggle onClick={toggleTheme} mode={mode === "light"} />
+      <button type="button" onClick={toggleTheme}>
+        {mode === "light" ? <Moon /> : <Sun />}
+      </button>
     </Wrapper>
   );
 };
