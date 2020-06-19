@@ -39,6 +39,25 @@ export default function GlobalStyle() {
           transition: 0.3s all;
         }
 
+        header {
+          background-color: ${mode === "night"
+            ? theme.colors.night.background
+            : theme.colors.light.background} !important;
+
+          button {
+            background: none !important;
+
+            svg {
+              stroke: ${mode === "night"
+                ? theme.colors.light.background
+                : theme.colors.night.background} !important;
+              fill: ${mode === "night"
+                ? theme.colors.light.background
+                : theme.colors.night.background} !important;
+            }
+          }
+        }
+
         blockquote p {
           background: ${mode === "night" ? "#343434" : "#f5f5fa"} !important;
         }
