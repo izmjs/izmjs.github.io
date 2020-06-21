@@ -1,0 +1,129 @@
+---
+title: VSCode Snippets
+---
+
+## Controller Snippets
+
+### Add controller documentation `doc:ctrl`
+
+```javascript lineNumbers=true
+/**
+ * $1
+ * @controller $2,
+ * @param {Express.Request} req The request
+ * @param {OutcommingMessage} res The response
+ * @param {Function} next Go to the next middleware
+ */
+```
+
+### Add controller documentation `ctrl`
+
+```javascript lineNumbers=true
+/**
+ * $1
+ * @controller $2
+ * @param {Express.Request} req The request
+ * @param {OutcommingMessage} res The response
+ * @param {Function} next Go to the next middleware
+ */
+exports.$3 = async function $3(req, res, next) {
+  $4;
+};
+```
+
+### Response Format `resp`
+
+```javascript lineNumbers=true
+{
+    success: $1,
+    result: {$2}
+}
+```
+
+## IAM Snippets
+
+### Create an IAM `iam`
+
+```javascript lineNumbers=true
+/**
+ * @type { IAM.default }
+ */
+module.exports = {
+  prefix: "/",
+  routes: [
+    {
+      path: "/",
+      methods: {
+        get: {
+          iam: "",
+          title: "",
+          groups: [],
+          parents: [],
+          description: "",
+          middlewares: [],
+        },
+      },
+    },
+  ],
+};
+```
+
+### Create an IAM Route `iam:route`
+
+```javascript lineNumbers=true
+{
+  path: '/',
+  methods: {
+    get: {
+      iam: '',
+      title: '',
+      groups: [],
+      parents: [],
+      description: '',
+      middlewares: [
+
+      ],
+    },
+  },
+}
+```
+
+### Create an IAM Method `iam:method`
+
+```javascript lineNumbers=true
+get: {
+  iam: '',
+  title: '',
+  groups: [],
+  parents: [],
+  description: '',
+  middlewares: [
+
+  ],
+},
+```
+
+## Model Snippets
+
+### Create a Model `iam:method`
+
+```javascript lineNumbers=true
+/**
+ * Module dependencies.
+ */
+const { Schema, model } = require("mongoose");
+const { resolve } = require("path");
+
+const { timestamps } = require("@config/index").lib.mongoose;
+
+const Schema = new Schema(
+  {
+    title: String,
+  },
+  {
+    timestamps,
+  }
+);
+
+module.exports = model("", Schema);
+```

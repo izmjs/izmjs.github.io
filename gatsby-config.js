@@ -4,7 +4,7 @@ module.exports = {
     defaultTitle: `izmjs`,
     siteTitleShort: `izmjs`,
     siteDescription: `a Highly maintainable & modular NodeJS project architecture`,
-    siteUrl: `https://github.com/izmjs/izmjs`,
+    siteUrl: `https://raw.githubusercontent.com/izmjs/izmjs.github.io/master/static/`,
     siteAuthor: "izmjs",
     siteImage: `/banner.png`,
     siteLanguage: `en`,

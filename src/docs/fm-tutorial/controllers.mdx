@@ -1,0 +1,177 @@
+---
+title: Controllers
+---
+
+We're going to make a controllers folder to handle the business logic for our routes separately, same as `bootstraps` and `iam` create a new folder under `/todo` and name it `controllers` and under controllers create a file called `main.server.controller.js`
+
+```bash
+modules
+└── todo
+    ├── bootstraps
+    │   └── main.server.bootstrap.js
+    ├── iam
+    │   └── main.server.iam.js
+    └── controllers
+        └── main.server.controller.js
+```
+
+And to create a new controller, you could use the built-in snippet.
+Type `ctrl` and press `TAB` and it'll generate the controller's base code and [JSDoc](https://devdocs.io/jsdoc/) for you
+
+```javascript title=modules/todo/controllers/main.server.iam.js lineNumbers=true
+/**
+*
+* @controller List
+* @param  {Express.Request}  req The request
+* @param  {OutcommingMessage}  res The response
+* @param  {Function}  next Go to the next middleware
+*/
+
+exports.  =  async  function (req, res, next) {
+
+};
+```
+
+Now let's create all the controllers for our CRUD
+
+```javascript title=modules/todo/controllers/main.server.iam.js lineNumbers=true
+/**
+ * List todos
+ * @controller List
+ * @param  {Express.Request}  req The request
+ * @param  {OutcommingMessage}  res The response
+ * @param  {Function}  next Go to the next middleware
+ */
+
+exports.list = async function list(req, res, next) {
+  res.json({ message: "hello world" });
+};
+
+/**
+ * Create todo
+ * @controller Create
+ * @param  {Express.Request}  req The request
+ * @param  {OutcommingMessage}  res The response
+ * @param  {Function}  next Go to the next middleware
+ */
+
+exports.create = async function create(req, res, next) {
+  res.status(201).json({ message: "Todo Created" });
+};
+
+/**
+ * List one Todo
+ * @controller One
+ * @param  {Express.Request}  req The request
+ * @param  {OutcommingMessage}  res The response
+ * @param  {Function}  next Go to the next middleware
+ */
+
+exports.one = async function one(req, res, next) {
+  res.json({ message: "got one task" });
+};
+
+/**
+ * Update todo
+ * @controller Update
+ * @param  {Express.Request}  req The request
+ * @param  {OutcommingMessage}  res The response
+ * @param  {Function}  next Go to the next middleware
+ */
+
+exports.update = async function update(req, res, next) {
+  res.json({ message: "Updated one task" });
+};
+
+/**
+ * Remove todo
+ * @controller Remove
+ * @param  {Express.Request}  req The request
+ * @param  {OutcommingMessage}  res The response
+ * @param  {Function}  next Go to the next middleware
+ */
+
+exports.remove = async function remove(req, res, next) {
+  res.json({ message: "deleted one task" });
+};
+```
+
+now let's get back to our `modules/todo/iam/main.server.iam.js` file and require in our controllers on the top
+
+```javascript title=modules/todo/iam/main.server.iam.js lineNumbers=true
+//highlight-start
+const ctrls = require("../controllers/main.server.controller");
+//highlight-end
+
+/**
+ * @type { IAM.default }
+ */
+module.exports = {
+  prefix: "/todo",
+  routes: [
+    {
+      path: "/",
+      methods: {
+        get: {
+          iam: "modules:todo:main:list",
+          title: "List todo",
+          groups: [],
+          parents: ["modules:todo", "modules:todo:main"],
+          description: "List available todo",
+          //highlight-start
+          middlewares: [ctrls.list],
+          //highlight-end
+        },
+
+        post: {
+          iam: "modules:todo:main:create",
+          title: "Create new task",
+          groups: [],
+          parents: ["modules:todo", "modules:todo:main"],
+          description: "Create new task",
+          //highlight-start
+          middlewares: [ctrls.create],
+          //highlight-end
+        },
+      },
+    },
+    {
+      path: "/:taskId",
+      methods: {
+        get: {
+          iam: "modules:todo:main:one:get",
+          title: "Get task",
+          groups: [],
+          parents: ["modules:todo", "modules:todo:main"],
+          description: "Get specific task",
+          //highlight-start
+          middlewares: [ctrls.one],
+          //highlight-end
+        },
+        put: {
+          iam: "modules:todo:main:one:update",
+          title: "Update task",
+          groups: [],
+          parents: ["modules:todo", "modules:todo:main"],
+          description: "Modify task",
+          //highlight-start
+          middlewares: [ctrls.update],
+          //highlight-end
+        },
+        delete: {
+          iam: "modules:todo:main:one:remove",
+          title: "Remove task",
+          groups: [],
+          parents: ["modules:todo", "modules:todo:main"],
+          description: "Remove an existing task",
+          //highlight-start
+          middlewares: [ctrls.remove],
+          //highlight-end
+        },
+      },
+    },
+  ],
+};
+```
+
+And now our next step is to create a model for our todo

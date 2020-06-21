@@ -30,7 +30,7 @@
   ],
   "scripts": {
     "build": "gatsby build",
-    "start": "gatsby develop",
+    "start": "gatsby develop -o",
     "serve": "gatsby serve",
     "clean": "gatsby clean"
   }

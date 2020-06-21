@@ -5,4 +5,34 @@
 - label: Getting Started
   link: "/getting-started"
 - label: Functional Modules
-  link: "/functional-modules"
+  items:
+    - label: Usage
+      link: "fm-tutorial/usage"
+    - label: Initial Setup
+      link: "fm-tutorial/initial-setup"
+    - label: Bootstraps
+      link: "fm-tutorial/bootstraps"
+    - label: IAM
+      link: "fm-tutorial/iam"
+    - label: Controllers
+      link: "fm-tutorial/controllers"
+    - label: Models
+      link: "fm-tutorial/models"
+    - label: Authentication And Authorization
+      link: "fm-tutorial/roles"
+    - label: i18n
+      link: "fm-tutorial/i18n"
+- label: Built-in Functional Modules
+  items:
+    - label: Devtools
+      link: "fm/devtools"
+    - label: Data Browser
+      link: "fm/data-browser"
+    - label: Chat Module
+      link: "fm/chat-module"
+    - label: Files Manager
+      link: "fm/files-manager"
+- label: misc
+  items:
+    - label: VSCode Snippets
+      link: "misc/snippets"

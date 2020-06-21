@@ -1,0 +1,197 @@
+---
+title: Models
+---
+
+to make a new model we need to create a new folder under the `/todo` folder called `models`, where all of our schemas will live and under `models` create a file called `task.server.model.js`
+
+```bash
+modules
+└── todo
+    ├── bootstraps
+    │   └── main.server.bootstrap.js
+    ├── iam
+    │   └── main.server.iam.js
+    ├── controllers
+    │   └── main.server.controller.js
+    └── models
+        └── task.server.model.js
+```
+
+To generate a new model there's a snippet for that, in `modules/todo/models/task.server.model.js` type in `module:model` and then press `TAB`
+
+```javascript title=modules/models/task.server.model.js lineNumbers=true
+/**
+ * Module dependencies.
+ */
+const { Schema, model } = require("mongoose");
+const { timestamps } = require("@config/index").lib.mongoose;
+
+const TodoSchema = new Schema(
+  {
+    name: String,
+    done: {
+      type: Boolean,
+      default: false,
+    },
+  },
+  {
+    timestamps,
+  }
+);
+
+module.exports = model("Todo", TodoSchema);
+```
+
+Now let's use our newly created model in the controller, on the top of the file require in the model from [mongoose](https://mongoosejs.com/) and do the logic for listing our todo and creating a task
+
+```javascript title=modules/todo/controllers/main.server.controller.js lineNumbers=true
+//highlight-start
+const { model, Types } = require("mongoose");
+const Todo = model("Todo");
+//highlight-end
+
+//highlight-start
+/**
+ * List todos
+ * @controller List
+ * @param  {Express.Request}  req The request
+ * @param  {OutcommingMessage}  res The response
+ * @param  {Function}  next Go to the next middleware
+ */
+
+exports.list = async function list(req, res, next) {
+  try {
+    const result = await Todo.find();
+    return res.json(result);
+  } catch (e) {
+    return next(e);
+  }
+};
+//highlight-end
+
+//highlight-start
+/**
+ * Create todo
+ * @controller Create
+ * @param  {Express.Request}  req The request
+ * @param  {OutcommingMessage}  res The response
+ * @param  {Function}  next Go to the next middleware
+ */
+
+exports.create = async function create(req, res, next) {
+  const { body } = req;
+  let task = new Todo(body);
+
+  try {
+    task = await task.save({ new: true });
+  } catch (e) {
+    return next(e);
+  }
+
+  return res.status(201).json(task);
+};
+//highlight-end
+
+//highlight-start
+/**
+ * List one Todo
+ * @controller One
+ * @param  {Express.Request}  req The request
+ * @param  {OutcommingMessage}  res The response
+ * @param  {Function}  next Go to the next middleware
+ */
+
+exports.one = async function one(req, res, next) {
+  const { taskId } = req.params;
+
+  if (!Types.ObjectId.isValid(taskId)) {
+    return res.status(400).send({
+      message: req.t("INVALID_TASK_ID", {
+        taskId,
+      }),
+    });
+  }
+  let task;
+  try {
+    task = await Todo.findById(taskId);
+  } catch (e) {
+    return next(e);
+  }
+  if (!task) {
+    return res.status(404).send({
+      message: req.t("TASK_NOT_FOUND", {
+        taskId,
+      }),
+    });
+  }
+  return res.json(task);
+};
+//highlight-end
+
+//highlight-start
+/**
+ * Update todo
+ * @controller Update
+ * @param  {Express.Request}  req The request
+ * @param  {OutcommingMessage}  res The response
+ * @param  {Function}  next Go to the next middleware
+ */
+
+exports.update = async function update(req, res, next) {
+  const { taskId } = req.params;
+  if (!Types.ObjectId.isValid(taskId)) {
+    return res.status(400).send({
+      message: req.t("INVALID_TASK_ID", {
+        taskId,
+      }),
+    });
+  }
+
+  let updatedTodo;
+  try {
+    updatedTodo = await Todo.findOneAndUpdate(
+      { _id: taskId },
+      {
+        name: req.body.name,
+        done: req.body.done,
+      },
+      { new: true }
+    );
+  } catch (e) {
+    next(e);
+  }
+
+  return res.send(updatedTodo);
+};
+//highlight-end
+
+//highlight-start
+/**
+ * Remove todo
+ * @controller Remove
+ * @param  {Express.Request}  req The request
+ * @param  {OutcommingMessage}  res The response
+ * @param  {Function}  next Go to the next middleware
+ */
+
+exports.remove = async function remove(req, res, next) {
+  const { taskId } = req.params;
+  if (!Types.ObjectId.isValid(taskId)) {
+    return res.status(400).send({
+      message: req.t("INVALID_TASK_ID", {
+        taskId,
+      }),
+    });
+  }
+  let deletedTask;
+
+  try {
+    deletedTask = await Todo.deleteOne({ _id: taskId });
+  } catch (e) {
+    next(e);
+  }
+
+  return res.send(deletedTask);
+};
+//highlight-end
+```
