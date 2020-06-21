@@ -18,7 +18,7 @@
       link: "fm-tutorial/controllers"
     - label: Models
       link: "fm-tutorial/models"
-    - label: Managing Roles
+    - label: Authentication And Authorization
       link: "fm-tutorial/roles"
     - label: i18n
       link: "fm-tutorial/i18n"
