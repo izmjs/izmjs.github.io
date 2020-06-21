@@ -178,7 +178,7 @@ Now that our user is signed let's try and make `GET` request to get the list of 
 
 ![sign in successful](../../images/iam/iam_not_authorized.png)
 
-Hmmm Bummer, it says that the user isn't authorized... Well, it makes sense because we haven't setup our iam for the user yet, now let's go ahead and asign to the user the iam that allows him to get the list of the todos, and it is as simple as putting the `"modules:todo:main:list"` iam in the user iam array.
+Hmmm Bummer, it says that the user isn't authorized... Well, it makes sense because we haven't setup our iam for the user yet, now let's go ahead and assign to the user the iam that allows him to get the list of the todos, and it is as simple as putting the `"modules:todo:main:list"` iam in the user iam array.
 
 ```javascript title=config/lib/acl.js lineNumbers=true
 /**
