@@ -10,8 +10,8 @@ title: VSCode Snippets
 /**
  * $1
  * @controller $2,
- * @param {Express.Request} req The request
- * @param {OutcommingMessage} res The response
+ * @param {import('express').Request} req The request
+ * @param {import('express').Response} res The response
  * @param {Function} next Go to the next middleware
  */
 ```
@@ -22,8 +22,8 @@ title: VSCode Snippets
 /**
  * $1
  * @controller $2
- * @param {Express.Request} req The request
- * @param {OutcommingMessage} res The response
+ * @param {import('express').Request} req The request
+ * @param {import('express').Response} res The response
  * @param {Function} next Go to the next middleware
  */
 exports.$3 = async function $3(req, res, next) {
@@ -42,29 +42,28 @@ exports.$3 = async function $3(req, res, next) {
 
 ## IAM Snippets
 
-### Create an IAM `iam`
+### Initialize an IAM file `iam`
 
 ```javascript lineNumbers=true
 /**
  * @type { IAM.default }
  */
 module.exports = {
-  prefix: "/",
-  routes: [
-    {
-      path: "/",
-      methods: {
-        get: {
-          iam: "",
-          title: "",
-          groups: [],
-          parents: [],
-          description: "",
-          middlewares: [],
-        },
+  prefix: '/',
+  routes: [{
+    path: '/',
+    methods: {
+      get: {
+        iam: 'modules:moduleName:fileName:apiKey',
+        title: '',
+        parents: ['modules:moduleName', 'modules:moduleName:fileName'],
+        description: '',
+        middlewares: [
+          
+        ],
       },
     },
-  ],
+  }],
 };
 ```
 
@@ -75,13 +74,12 @@ module.exports = {
   path: '/',
   methods: {
     get: {
-      iam: '',
+      iam: 'modules:moduleName:fileName:apiKey',
       title: '',
-      groups: [],
-      parents: [],
+      parents: ['modules:moduleName', 'modules:moduleName:fileName'],
       description: '',
       middlewares: [
-
+        
       ],
     },
   },
@@ -92,38 +90,152 @@ module.exports = {
 
 ```javascript lineNumbers=true
 get: {
-  iam: '',
+  iam: 'modules:moduleName:fileName:apiKey',
   title: '',
-  groups: [],
-  parents: [],
+  parents: ['modules:moduleName', 'modules:moduleName:fileName'],
   description: '',
   middlewares: [
-
+    
   ],
 },
 ```
 
-## Model Snippets
+## Module Snippets
 
-### Create a Model `iam:method`
+### Create a Model `module:model`
 
 ```javascript lineNumbers=true
 /**
  * Module dependencies.
  */
-const { Schema, model } = require("mongoose");
-const { resolve } = require("path");
+const { Schema, model } = require('mongoose');
 
-const { timestamps } = require("@config/index").lib.mongoose;
+const { timestamps } = require('@config/index').lib.mongoose;
 
-const Schema = new Schema(
-  {
-    title: String,
-  },
-  {
-    timestamps,
-  }
-);
+const Schema = new Schema({
+  title: String,
+}, {
+  timestamps,
+});
 
-module.exports = model("", Schema);
+module.exports = model('', Schema);
 ```
+
+## Env variables Snippets
+
+### Add a new field `env:field`
+
+```json lineNumbers=true
+{
+  "": {
+    "name": "",
+    "defaultValue": ,
+    "scope": "",
+    "schema": {
+      "type": "string"
+    }
+  }
+}
+```
+
+## Postman snippets
+
+All of the bellow snippets are used in a [JSDoc block](https://jsdoc.app/about-getting-started.html#adding-documentation-comments-to-your-code) inside an IAM file
+
+### Add the body `@body`
+
+Will add by default a JSON payload
+
+```javascript lineNumbers=true
+/**
+ * @body
+ * {
+ *   "": ""
+ * }
+ */
+```
+
+In order to add a different format of the payload, please use oneof these snippets:
+
+- `@urlencoded` to set the body of an URL encoded payload
+- `@formdata` to set the body of an Form Data payload
+- `@bodyMode` to set a custom payload format
+
+### Add a test script to the request `@test`
+
+```javascript lineNumbers=true
+/**
+* @test
+* pm.test("Status code is 200", function () {
+*   pm.response.to.have.status(200);
+* });
+*/
+```
+
+### Add a prerequest script to the request `@prerequest`
+
+```javascript lineNumbers=true
+/**
+ * @prerequest
+ * pm.environment.set("", "");
+ */
+```
+
+### Set the params of the request `@params`
+
+```javascript lineNumbers=true
+/**
+ * @params
+ * [{
+ *   "key": "",
+ *   "value": "",
+ *   "description": ""
+ * }]
+ */
+```
+
+### Set the headers of the request `@headers`
+
+```javascript lineNumbers=true
+/**
+ * @headers
+ * {
+ *   "": ""
+ * }
+ */
+```
+
+### Add an example to the request `@example`
+
+```
+/**
+* @example
+* {
+*   "name": "Example name",
+*   "response": {
+*     "status": 200,
+*     "headers": {
+*       "": ""
+*     },
+*     "body": {
+*       "": ""
+*     }
+*   },
+*   "request": {
+*     "params": [{
+*       "key": "",
+*       "value": "",
+*       "description": ""
+*     }],
+*     "headers": {
+*       "": ""
+*     },
+*     "body": {
+*       "": ""
+*     }
+*   }
+* }
+*/
+```
+
+You add as many examples as you need.
